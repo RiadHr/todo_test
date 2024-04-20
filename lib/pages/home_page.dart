@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
 import 'package:to_do_app_test/provider/task_provider.dart';
 
 import '../models/task.dart';
 import 'add_task_page.dart';
-
+Logger logger = Logger();
 class HomePage extends StatefulWidget {
   const HomePage({super.key, required this.title});
   final String title;
@@ -14,7 +15,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<Task> tasks =[Task()];
+  List<Task> tasks =[Task(title: "first task",description: "go gym")];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,11 +27,15 @@ class _HomePageState extends State<HomePage> {
       body: Center(
         child:Consumer<TaskProvider>(
           builder:(context, value, child) {
-               return ListView.builder(
-                 // itemCount: context<TaskProvider>,
-                 itemBuilder:(context, index) {
-                 return const Text("slm");
-               },);
+               return Center(
+                 child: ListView.builder(
+                   itemCount: value.tasks.length,
+                   itemBuilder:(context, index) {
+                      Task taskItem = value.tasks[index];
+                      logger.i(taskItem);
+                      return Text(taskItem.title);
+                 },),
+               );
         },)
       ),
       floatingActionButton: FloatingActionButton(
