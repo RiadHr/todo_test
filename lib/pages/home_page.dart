@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
 import 'package:to_do_app_test/provider/task_provider.dart';
+import 'package:to_do_app_test/widget/task_item.dart';
 
 import '../models/task.dart';
 import 'add_task_page.dart';
@@ -33,7 +34,7 @@ class _HomePageState extends State<HomePage> {
                    itemBuilder:(context, index) {
                       Task taskItem = value.tasks[index];
                       logger.i(taskItem);
-                      return Text(taskItem.title);
+                      return TaskItem(task: taskItem, onChangedTitle: (value) {}, onChangedDescription:(value) {},);
                  },),
                );
         },)
