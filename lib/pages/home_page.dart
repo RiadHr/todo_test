@@ -3,9 +3,10 @@ import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
 import 'package:to_do_app_test/provider/task_provider.dart';
 import 'package:to_do_app_test/widget/task_item.dart';
-
 import '../models/task.dart';
 import 'add_task_page.dart';
+
+
 Logger logger = Logger();
 class HomePage extends StatefulWidget {
   const HomePage({super.key, required this.title});
@@ -16,7 +17,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<Task> tasks =[Task(title: "first task",description: "go gym")];
+
+  void editTaskHandler(Task task,int index){
+    context.read<TaskProvider>().editTask(task.title, task.description, task.isDone, index);
+  }
+
+  void deleteTaskHandler(Task task){
+    context.read<TaskProvider>().deleteTask(task);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +42,11 @@ class _HomePageState extends State<HomePage> {
                    itemBuilder:(context, index) {
                       Task taskItem = value.tasks[index];
                       logger.i(taskItem);
-                      return TaskItem(task: taskItem, onChangedTitle: (value) {}, onChangedDescription:(value) {},);
+                      return TaskItem(task: taskItem, onEditTask: () {
+                        editTaskHandler(taskItem,index);
+                      }, onDeleteTask:() {
+                        deleteTaskHandler(taskItem);
+                      },);
                  },),
                );
         },)

@@ -2,7 +2,7 @@ import 'package:flutter/widgets.dart';
 import '../models/task.dart';
 
 class TaskProvider extends ChangeNotifier{
-  List<Task> tasks=[];
+  List<Task> tasks=[Task(title: "first task",description: "go gym")];
 
 
   void addTask(Task task){
