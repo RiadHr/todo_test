@@ -21,46 +21,46 @@ class _AddTaskPageState extends State<AddTaskPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-            const Center(child: Text("Add Task",style: TextStyle(fontSize: 32,fontWeight: FontWeight.w700),)),
-            const SizedBox(height: 16,),
-            TextField(
-              decoration: InputDecoration(
+          const Center(child: Text("Add Task",style: TextStyle(fontSize: 32,fontWeight: FontWeight.w700),)),
+          const SizedBox(height: 16,),
+          TextField(
+            decoration: InputDecoration(
                 border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
                 label: const Text("title")
-              ),
-              onChanged: (value) {
-                setState(() {
-                  title = value;
-                });
-              },
             ),
-            const SizedBox(height: 16,),
-            TextField(
-                onChanged: (value) {
-                  setState(() {
-                    description = value;
-                  });
-                },
-                maxLines: 3,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-                  label: const Text("description"),
-                ),
+            onChanged: (value) {
+              setState(() {
+                title = value;
+              });
+            },
+          ),
+          const SizedBox(height: 16,),
+          TextField(
+            onChanged: (value) {
+              setState(() {
+                description = value;
+              });
+            },
+            maxLines: 3,
+            decoration: InputDecoration(
+              border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+              label: const Text("description"),
             ),
-            const SizedBox(height: 16,),
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
+          ),
+          const SizedBox(height: 16,),
+          SizedBox(
+            width: double.infinity,
+            child: ElevatedButton(
                 style: ButtonStyle(
                     foregroundColor: MaterialStateProperty.all(Colors.black),
                     elevation: MaterialStateProperty.all(5),
                     backgroundColor: MaterialStateProperty.all(Colors.deepPurpleAccent)),
-                  onPressed: () {
-                      context.read<TaskProvider>().addTask(Task(title: title,description:description));
-                  },
-                  child: const Text("Add",style: TextStyle(fontSize: 22,fontWeight: FontWeight.w500),)
-              ),
+                onPressed: () {
+                  context.read<TaskProvider>().addTask(Task(title: title,description:description));
+                },
+                child: const Text("Add",style: TextStyle(fontSize: 22,fontWeight: FontWeight.w500),)
             ),
+          ),
         ],
       ),
     );
