@@ -11,8 +11,6 @@ class AddTaskPage extends StatefulWidget {
 }
 
 class _AddTaskPageState extends State<AddTaskPage> {
-  // final textEditControllerTitle = TextEditingController();
-  // final textEditControllerDescription = TextEditingController();
   String title="";
   String description = "";
 

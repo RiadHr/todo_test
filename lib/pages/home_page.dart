@@ -18,10 +18,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
-  void editTaskHandler(Task task,int index){
-    context.read<TaskProvider>().editTask(task.title, task.description, task.isDone, index);
-  }
-
   void deleteTaskHandler(Task task){
     context.read<TaskProvider>().deleteTask(task);
   }
@@ -42,11 +38,11 @@ class _HomePageState extends State<HomePage> {
                    itemBuilder:(context, index) {
                       Task taskItem = value.tasks[index];
                       logger.i(taskItem);
-                      return TaskItem(task: taskItem, onEditTask: () {
-                        editTaskHandler(taskItem,index);
-                      }, onDeleteTask:() {
-                        deleteTaskHandler(taskItem);
-                      },);
+                      return TaskItem(
+                          index:index,
+                          task: taskItem,
+                          onDeleteTask:() => deleteTaskHandler(taskItem)
+                      );
                  },),
                );
         },)
@@ -56,7 +52,7 @@ class _HomePageState extends State<HomePage> {
             builder: (context) => AddTaskPage(),),
         tooltip: 'Increment',
         child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
     );
   }
 }

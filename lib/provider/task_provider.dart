@@ -15,10 +15,9 @@ class TaskProvider extends ChangeNotifier{
     notifyListeners();
   }
 
-  void editTask(String title,String description,bool isDone,int index){
+  void editTask(String title,String description,int index){
     tasks[index].title = title;
     tasks[index].description = description;
-    tasks[index].isDone = isDone;
     notifyListeners();
   }
 }
